@@ -1,0 +1,15 @@
+<?xml version='1.0' standalone='yes'?>
+<books>
+    <book>
+        <author>Isak Azimov</author>
+        <name>End of spirit</name>
+    </book>
+    <book>
+        <author>3</author>
+        <name>Standard</name>
+    </book>
+    <book>
+        <author>3</author>
+        <name>Standard II</name>
+    </book>
+</books>
