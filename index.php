@@ -10,8 +10,8 @@
             <div>
                 <h1>List of authors and books</h1>
                 <div class="search-container">
-                <form action="/action_page.php">
-                    <input type="text" placeholder="Search.." name="search">
+                <form action="/" method="GET">
+                    <input value="<?php echo isset($_GET['author']) ? $_GET['author'] : '' ?>" type="text" placeholder="Search.." name="author">
                     <button type="submit">Submit</button>
                 </form>
             </div>
@@ -19,32 +19,25 @@
         <section>
             <div class="content-wrapper">
             <?php
-                    require 'src/Factories/AuthorFactory.php';
-                    require 'src/Database/PgSqlConnection.php';
-                    use Bookstore\Factories\AuthorFactory;
-                    use Bookstore\Database\PgSqlConnection;
+            include 'search.php';
 
-                    $db = PgSqlConnection::getInstance();
-                    $author = new AuthorFactory($db);
-                    $data = $author->getAuthorsAndBooks();
-
-                    if ($data) {
-                        foreach($data as $res) {
-                    ?>
-                    <div class="row fade-item">
-                        <div class="column"><?php echo $res['author']; ?></div>
-                        <div class="column"><?php echo $res['book']; ?></div>
-                    </div>
-                    <?php
-                        }
-                    } else {
-                    ?>
-                    <div class="row fade-item">
-                        <p>No results found!</p>
-                    </div>
-                    <?php
-                    }
-                ?>
+            if ($data) {
+                foreach($data as $res) {
+            ?>
+            <div class="row fade-item">
+                <div class="column"><?php echo $res['author']; ?></div>
+                <div class="column"><?php echo $res['book']; ?></div>
+            </div>
+            <?php
+                }
+            } else {
+            ?>
+            <div class="row fade-item">
+                <p>No results found!</p>
+            </div>
+            <?php
+            }
+            ?>
             </div>
         </section>
     </main>
